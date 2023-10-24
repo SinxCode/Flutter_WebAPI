@@ -12,6 +12,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Simple Journal',
       debugShowCheckedModeBanner: false,
+      //Define como o tema da aplicação irá funcionar
+      theme: ThemeData(
+        primarySwatch: Colors.grey,
+        appBarTheme: const AppBarTheme(
+          elevation: 0,
+          backgroundColor: Colors.black,
+          titleTextStyle: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+      ),
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.light,
       initialRoute: "home",
