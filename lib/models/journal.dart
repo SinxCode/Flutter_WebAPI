@@ -1,3 +1,5 @@
+import 'package:uuid/uuid.dart';
+
 class Journal {
   String id;
   String content;
@@ -10,6 +12,22 @@ class Journal {
     required this.createdAt,
     required this.updatedAt,
   });
+
+//Construtor que gera um journal vazio
+  Journal.empty()
+      : id = const Uuid().v1(),
+        content = '',
+        createdAt = DateTime.now(),
+        updatedAt = DateTime.now();
+
+  Map<String, dynamic> toMap() {
+    return {
+      "id": id,
+      "content": content,
+      "createdAt": createdAt.toString(),
+      "updatedAt": updatedAt.toString()
+    };
+  }
 
   @override
   String toString() {

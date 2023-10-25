@@ -1,5 +1,13 @@
 {
   "learnhttp": {
     "content": "Olá mundo!"
-  }
+  },
+  "journals": [
+    {
+      "id": "dc7aaa00-736d-11ee-b279-7fbd1b564b56",
+      "content": "",
+      "createdAt": "2023-10-25 19:36:58.277605",
+      "updatedAt": "2023-10-25 19:36:58.277785"
+    }
+  ]
 }
