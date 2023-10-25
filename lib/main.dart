@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.grey,
         appBarTheme: const AppBarTheme(
+          iconTheme: IconThemeData(color: Colors.white),
           elevation: 0,
           backgroundColor: Colors.black,
           titleTextStyle: TextStyle(
@@ -33,16 +34,19 @@ class MyApp extends StatelessWidget {
       ),
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.light,
-      initialRoute: "add-journal",
+      initialRoute: "home",
       routes: {
         "home": (context) => const HomeScreen(),
-        "add-journal": (context) => AddJournalScreen(
-              journal: Journal(
-                  id: "id",
-                  content: "content",
-                  createdAt: DateTime.now(),
-                  updatedAt: DateTime.now()),
-            ),
+          
+      },
+      //chamando a tela de add-journal, isso identifica qual rota foi chamada e pega os argumentos que vieram com ela
+      onGenerateRoute: (settings){
+          if(settings.name == 'add-journal'){
+            final Journal journal = settings.arguments as Journal;
+            return MaterialPageRoute(builder: (context) {
+              return AddJournalScreen(journal: journal);
+            });
+          }
       },
     );
   }
