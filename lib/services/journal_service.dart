@@ -13,15 +13,15 @@ class JournalService{
     return '$url$resource';
   }
 
-  //Criando um construtor de registro (POST)
+  //Criando um controller de registro (POST)
   register(String content){
   client.post(Uri.parse(getUrl()), body: { 'content': content });
   }
 
-  //Criando um consrtutor de leitura (GET)
+  //Criando um controller de leitura (GET)
   Future<String> get()async{
    http.Response response  = await client.get(Uri.parse(getUrl()));
    print(response.body);
    return response.body;
   }
-  }
+}
