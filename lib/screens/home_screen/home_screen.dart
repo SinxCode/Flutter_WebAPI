@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(onPressed: (){
             refresh();
-          }, icon: Icon(Icons.refresh))
+          }, icon: const Icon(Icons.refresh))
         ],
       ),
       body: ListView(
