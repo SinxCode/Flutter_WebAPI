@@ -1,4 +1,11 @@
 {
+  "users": [
+    {
+      "email": "teste@gmail.com",
+      "password": "$2a$10$8f5LlRNlu566gicRw4L6wuYM3Fh0G0y6mR0kDsnFmmmmbKtDboncC",
+      "id": 1
+    }
+  ],
   "learnhttp": {
     "content": "Olá mundo!"
   },
