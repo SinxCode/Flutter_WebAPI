@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_webapi_first_course/screens/home_screen/commom/confirmation_dialog.dart';
+import 'package:flutter_webapi_first_course/services/auth_service.dart';
 
+// ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  LoginScreen({Key? key}) : super(key: key);
+
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  AuthService service = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -34,19 +41,24 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const Text("Entre ou Registre-se"),
                   TextFormField(
+                    controller: _emailController,
                     decoration: const InputDecoration(
                       label: Text("E-mail"),
                     ),
                     keyboardType: TextInputType.emailAddress,
                   ),
                   TextFormField(
+                    controller: _passwordController,
                     decoration: const InputDecoration(label: Text("Senha")),
                     keyboardType: TextInputType.visiblePassword,
                     maxLength: 16,
                     obscureText: true,
                   ),
                   ElevatedButton(
-                      onPressed: () {}, child: const Text("Continuar")),
+                      onPressed: () {
+                        login(context);
+                      },
+                      child: const Text("Continuar")),
                 ],
               ),
             ),
@@ -54,5 +66,26 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  login(BuildContext context) async {
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    try {
+      bool result = await service.login(email: email, password: password);
+    } on UserNotFindException {
+      ShowConfirmationDialog(
+        context,
+        content:
+            "Deseja criar um novo usuário usando o e-mail $email e a senha inserida?",
+        affirmativeOption: "CRIAR",
+      ).then((value) {
+        if (value != null && value) {
+          service.register(email: email, password: password);
+          
+        }
+      });
+    }
   }
 }

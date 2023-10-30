@@ -37,8 +37,8 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       initialRoute: "login",
       routes: {
-        "home": (context) => const HomeScreen(),
-        "login": (context) => const LoginScreen(),
+        "home": (context) =>  HomeScreen(),
+        "login": (context) =>  LoginScreen(),
           
       },
       //chamando a tela de add-journal, isso identifica qual rota foi chamada e pega os argumentos que vieram com ela
