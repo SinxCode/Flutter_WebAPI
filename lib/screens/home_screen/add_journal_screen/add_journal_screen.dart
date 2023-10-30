@@ -5,7 +5,8 @@ import 'package:flutter_webapi_first_course/services/journal_service.dart';
 
 class AddJournalScreen extends StatelessWidget {
   final Journal journal;
-  AddJournalScreen({Key? key, required this.journal}) : super(key: key);
+  final bool isEditing;
+  AddJournalScreen({Key? key, required this.journal, required this.isEditing}) : super(key: key);
   final TextEditingController _contentController = TextEditingController();
 
   @override
@@ -40,12 +41,24 @@ class AddJournalScreen extends StatelessWidget {
   //Função que registra uma nova entrada no diário
   registerJournal(BuildContext context) async{
     String content = _contentController.text;
-    journal.content = content;
-    JournalService service = JournalService();
-    
-    bool result = await service.register(journal);
 
-    //Explode a tela atual voltando para tela anterior
-    Navigator.pop(context, result);
+    journal.content = content;
+
+    JournalService service = JournalService();
+    if(isEditing){
+      service.register(journal).then((value){
+        Navigator.pop(context, value);
+      });
+
+    }else{
+        service.edit(journal.id, journal).then((value){
+        Navigator.pop(context, value);
+     
+    });
+    }
   }
 }
+  
+ 
+  
+

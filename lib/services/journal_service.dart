@@ -7,7 +7,7 @@ import 'package:http_interceptor/http/http.dart';
 
 class JournalService {
   //Se conectando na API
-  static const String url = 'http://192.168.0.37:3000/';
+  static const String url = 'http://192.168.40.234:3000/';
   static const String resource = 'journals/';
 
   //Criando um cliente HTTP para utilizar os interceptadores.
@@ -32,6 +32,24 @@ class JournalService {
       return true;
     }
     return false;
+  }
+
+  //Criando Controller de edição (PUT)
+  Future<bool> edit(String id, Journal journal) async{
+    String jsonJournal = json.encode(journal.toMap());
+     http.Response response = await client.put(
+      Uri.parse("${getUrl()}$id"),
+      headers: {
+        'Content-type' : 'application/json'
+      },
+      body: jsonJournal,
+    );
+
+    if (response.statusCode ==200) {
+      return true;
+    }
+    return false;
+
   }
 
   //Criando um controller de leitura (GET)

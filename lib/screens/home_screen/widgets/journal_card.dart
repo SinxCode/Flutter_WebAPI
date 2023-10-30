@@ -104,7 +104,7 @@ class JournalCard extends StatelessWidget {
     }
   }
 
-  //Função para chamar a tela de cadastro de Journal
+  //Função para chamar a tela de cadastro / edição de Journal
   callAddJournalScreen(BuildContext context, {Journal? journal}) {
     Journal innerJournal = Journal(
       id: const Uuid().v1(),
@@ -112,13 +112,22 @@ class JournalCard extends StatelessWidget {
       createdAt: showedDate,
       updatedAt: showedDate,
     );
+       Map<String, dynamic> map = {};
     if (journal != null) {
       innerJournal = journal;
+      map['is_editing'] = false;
+    }else{
+      map['is_editing'] = true;
     }
+
+ 
+    map['journal'] = innerJournal;
+
+
     Navigator.pushNamed(
       context,
       'add-journal',
-      arguments: innerJournal,
+      arguments: map,
     ).then((value) {
       refreshFunction();
       if (value != null && value == true) {
