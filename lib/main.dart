@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_webapi_first_course/models/journal.dart';
 import 'package:flutter_webapi_first_course/screens/home_screen/add_journal_screen/add_journal_screen.dart';
+import 'package:flutter_webapi_first_course/screens/home_screen/login_Screen/login_screen.dart';
 import 'package:flutter_webapi_first_course/services/journal_service.dart';
 import 'screens/home_screen/home_screen.dart';
 
@@ -9,7 +10,7 @@ void main() {
 
   JournalService service = JournalService();
   //service.register(Journal.empty());
-  service.getAll();
+  //service.getAll();
 }
 
 class MyApp extends StatelessWidget {
@@ -34,9 +35,10 @@ class MyApp extends StatelessWidget {
       ),
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.light,
-      initialRoute: "home",
+      initialRoute: "login",
       routes: {
         "home": (context) => const HomeScreen(),
+        "login": (context) => const LoginScreen(),
           
       },
       //chamando a tela de add-journal, isso identifica qual rota foi chamada e pega os argumentos que vieram com ela
